@@ -1,24 +1,25 @@
 #[macro_use] extern crate rocket;
+mod models;
 
-use rocket::serde::{json::Json, Deserialize, Serialize};
-
-// Struct to receive number input
-#[derive(Deserialize)]
-struct NumberInput {
-    number: u64,
-}
-
-// Struct to return the result
-#[derive(Serialize)]
-struct PrimeCheckResult {
-    is_prime: bool,
-}
+use models::{NumberInput, PrimeCheckResult, ErrorResponse};
+use rocket::serde::json::Json;
+use rocket::{http::Status, response::status::Custom};
 
 #[post("/api/prime-check", format = "json", data = "<input>")]
-fn prime_check(input: Json<NumberInput>) -> Json<PrimeCheckResult> {
-    Json(PrimeCheckResult {
-        is_prime: is_prime(input.number),
-    })
+fn prime_check(input: Result<Json<NumberInput>, rocket::serde::json::Error<'_>>) 
+    -> Result<Json<PrimeCheckResult>, Custom<Json<ErrorResponse>>> 
+{
+    match input {
+        Ok(valid_input) => Ok(Json(PrimeCheckResult {
+            is_prime: is_prime(valid_input.number),
+        })),
+        Err(_) => Err(Custom(
+            Status::BadRequest,
+            Json(ErrorResponse {
+                error: String::from("Invalid input. Please provide a valid number."),
+            }),
+        )),
+    }
 }
 
 #[get("/")]
