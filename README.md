@@ -16,4 +16,4 @@ In order to run, you must have the latest version of VS Code, Node >= 14.0.0, np
      -d '{"number": 29}'`
     - `curl -X POST http://localhost:8000/api/prime-check \
      -H "Content-Type: application/json" \
-     -d '{"number": "not a number"}'`
+     -d '{"number": "null"}'`
