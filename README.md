@@ -10,7 +10,10 @@ In order to run, you must have the latest version of VS Code, Node >= 14.0.0, np
 3. In the terminal run the following to start the server @ http://localhost:8000: 
     - `cargo build`
     - `cargo run`
-4. Test the API with the following curl:
-    `curl -X POST http://localhost:8000/api/prime-check \
+4. Test the API with the following curl requests:
+    - `curl -X POST http://localhost:8000/api/prime-check \
      -H "Content-Type: application/json" \
      -d '{"number": 29}'`
+    - `curl -X POST http://localhost:8000/api/prime-check \
+     -H "Content-Type: application/json" \
+     -d '{"number": "not a number"}'`
