@@ -1,5 +1,5 @@
 # Next-Rust
-Simple monorepo app built with **Next** & **Rusts**.
+Simple monorepo app built with **Next** & **Rust**.
 
 
 ### Installing and running this solution
