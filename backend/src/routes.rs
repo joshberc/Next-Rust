@@ -4,19 +4,14 @@ use rocket::{http::Status, response::status::Custom};
 use crate::actions::{is_prime, generate_primes, median_primes};
 use crate::models::{ErrorResponse, UpperLimit, NumberInput, MedianPrimesResult, PrimeCheckResult};
 
-#[get("/")]
-pub fn root() -> &'static str {
-    "Welcome to the Rocket API!"
-}
-
 #[post("/api/median-primes", format = "json", data = "<input>")]
 pub fn median_primes_route(input: Result<Json<UpperLimit>, rocket::serde::json::Error<'_>>) 
     -> Result<Json<MedianPrimesResult>, Custom<Json<ErrorResponse>>> 
 {
     match input {
         Ok(valid_input) => {
-            let primes = generate_primes(valid_input.n);
-            let medians = median_primes(&primes);
+            let primes: Vec<u64> = generate_primes(valid_input.n);
+            let medians: Vec<u64> = median_primes(&primes);
 
             Ok(Json(MedianPrimesResult {
                 median_primes: medians,
