@@ -17,3 +17,6 @@ In order to run, you must have the latest version of VS Code, Node >= 14.0.0, np
     - `curl -X POST http://127.0.0.1:8000/api/median-primes \
      -H "Content-Type: application/json" \
      -d '{"n": 1000}'`
+5. Navigate to **/frontend** and run:
+    - `npm i`
+    - `npm run dev`
