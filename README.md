@@ -14,6 +14,6 @@ In order to run, you must have the latest version of VS Code, Node >= 14.0.0, np
     - `curl -X POST http://localhost:8000/api/prime-check \
      -H "Content-Type: application/json" \
      -d '{"number": 29}'`
-    - `curl -X POST http://localhost:8000/api/prime-check \
+    - `curl -X POST http://127.0.0.1:8000/api/median-primes \
      -H "Content-Type: application/json" \
-     -d '{"number": "null"}'`
+     -d '{"n": 1000}'`
